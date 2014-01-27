@@ -2,7 +2,7 @@ $(document).ready(function() {
 
   var options = {
     chart: {
-      renderTo: 'container',
+      renderTo: 'center-container',
       type: 'column'
     },
     title: {
@@ -18,7 +18,7 @@ $(document).ready(function() {
   };
 
   // retrieve local json file
-  var filepath = "http://localhost/activity_count.json";
+  var filepath = "http://localhost/highcharts/activity_count.json";
   $.ajax({
     'async': false,
     'global': false,
@@ -27,7 +27,7 @@ $(document).ready(function() {
     'success': function (data) {
 
       options.series = data;
-      options.xAxis.categories = data
+      //options.xAxis.categories = data
       var chart = new Highcharts.Chart(options);
 
     }
