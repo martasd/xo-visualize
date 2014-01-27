@@ -1,5 +1,24 @@
 $(document).ready(function() {
 
+  // an array of json data to visualize
+  var charts = {
+    "activity_count": "Activity Frequency",
+    "activity_files": "Files Generated",
+    "activity_share": "Activities Shared"
+  };
+
+
+  // add a button for each chart file in left container
+  for (var chart in charts) {
+    var button = document.createElement('a');
+    button.setAttribute('href', '#');
+    button.setAttribute('class', 'theme button white');
+    button.setAttribute('onclick', chart + '()');
+    var label = document.createTextNode(charts[chart]);
+    button.appendChild(label);
+    document.getElementById('left-container').appendChild(button);
+  }
+
   var options = {
     chart: {
       renderTo: 'center-container',
