@@ -12,7 +12,7 @@ define (["jquery", "highcharts"], function($, highcharts) {
           type: 'column'
         },
         title: {
-          text: 'Activity Frequency'
+          text: 'Activity Sharing'
         },
         xAxis: {
           tickInterval: 1
@@ -24,7 +24,7 @@ define (["jquery", "highcharts"], function($, highcharts) {
       };
 
       // retrieve local json file
-      var filepath = "http://localhost/highcharts/" + deployment + "/activity_count.json";
+      var filepath = "http://localhost/highcharts/" + deployment + "/activity_share.json";
       $.ajax({
         'async': false,
         'global': false,
