@@ -17,6 +17,7 @@ __email__ = "martin@gnu.org"
 __version__ = "0.1"
 
 import json
+import itertools
 from docopt import docopt
 
 
@@ -28,23 +29,24 @@ def convert_json_for_highcharts(infile, outfile):
 
     # Read in the file
     with open(infile, "r") as fp_in:
-        data = fp_in.read()
-    data_in = json.loads(data)
+        stats = fp_in.read()
+    stats_in = json.loads(stats)
 
     # Save in the proper format
-    data_out = []
+    chart_stats = {
+        "categories": [],
+        "stats": []
+    }
 
-    for activity_name, activity_stats in data_in.items():
-        activity_data = {
-            "name": activity_name,
-            "data": activity_stats.values()
-        }
-        data_out.append(activity_data)
+    # highcharts requires pre-sorting of stats
+    stats_list = []
+    for activity_name in sorted(stats_in, key=stats_in.get):
+        chart_stats['categories'].append(activity_name)
+        stats_list.append(stats_in[activity_name].values())
 
-    # highcharts requires pre-sorting of data
-    data_out.sort()
+    chart_stats['stats'] = list(itertools.chain.from_iterable(stats_list))
     with open(outfile, "w") as fp_out:
-        json.dump(data_out, fp_out, indent=4)
+        json.dump(chart_stats, fp_out, indent=4)
 
 
 def main():
@@ -61,3 +63,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
