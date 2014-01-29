@@ -15,10 +15,9 @@ define (["jquery", "highcharts"], function($, highcharts) {
           text: 'Activity Files Generated'
         },
         xAxis: {
-          tickInterval: 1
         },
         legend: {
-          enabled: true
+          enabled: false
         },
         series: [{}]
       };
@@ -33,8 +32,13 @@ define (["jquery", "highcharts"], function($, highcharts) {
       })
       .done(function (data) {
 
-          options.series = data;
-          //options.xAxis.categories = data
+          var series = {
+            name: "Number of files created",
+            data: data.stats
+          }
+
+          options.series.push(series);
+          options.xAxis.categories = data.categories;
           var chart = new Highcharts.Chart(options);
       });
     }

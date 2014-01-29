@@ -15,10 +15,9 @@ define (["jquery", "highcharts"], function($, highcharts) {
           text: 'Activity Frequency'
         },
         xAxis: {
-          tickInterval: 1
         },
         legend: {
-          enabled: true
+          enabled: false
         },
         series: [{}]
       };
@@ -32,8 +31,13 @@ define (["jquery", "highcharts"], function($, highcharts) {
         'dataType': "json",
         'success': function (data) {
 
-          options.series = data;
-          //options.xAxis.categories = data
+          var series = {
+            name: "Number of instances launched",
+            data: data.stats
+          }
+
+          options.series.push(series);
+          options.xAxis.categories = data.categories;
           var chart = new Highcharts.Chart(options);
 
         }
