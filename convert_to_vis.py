@@ -39,12 +39,13 @@ def convert_json_for_highcharts(infile, outfile):
     }
 
     # highcharts requires pre-sorting of stats
-    stats_list = []
     for activity_name in sorted(stats_in, key=stats_in.get):
-        chart_stats['categories'].append(activity_name)
-        stats_list.append(stats_in[activity_name].values())
+        # assume one-element list
+        stats_val = stats_in[activity_name].values()[0]
+        if stats_val != 0:
+            chart_stats['categories'].append(activity_name)
+            chart_stats['stats'].append(stats_val)
 
-    chart_stats['stats'] = list(itertools.chain.from_iterable(stats_list))
     with open(outfile, "w") as fp_out:
         json.dump(chart_stats, fp_out, indent=4)
 
