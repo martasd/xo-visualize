@@ -32,6 +32,7 @@ require(['jquery', 'domReady!', 'select2', 'buttons'],
           var deployments = ['mauwa','koral','selaling'];
           var drop_down = $(document.createElement('select'))
                           .attr('id', 'deployments');
+          var label = $(document.createElement('label'));
 
           var option, deployment;
           for (var i = 0; i < deployments.length; i++) {
@@ -40,7 +41,7 @@ require(['jquery', 'domReady!', 'select2', 'buttons'],
             option.append(deployment);
             drop_down.append(option);
           };
-          $('#left-container').append(drop_down);
+          $('#left-container').append(label, drop_down);
 
           // Add button options when a deployment gets selected
           $('#deployments').change( function() {
