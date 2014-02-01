@@ -12,8 +12,8 @@ require.config({
   }
 });
 
-require(['jquery', 'domReady!', 'select2', 'activity_count', 'activity_files', 'activity_share'],
-        function($, doc, select2, activity_count, activity_files, activity_share) {
+require(['jquery', 'domReady!', 'select2', 'buttons'],
+        function($, doc, select2, buttons) {
 
           /// TODO: how to unhide select2 input box?
           // specify the data source
@@ -42,36 +42,16 @@ require(['jquery', 'domReady!', 'select2', 'activity_count', 'activity_files', '
           };
           $('#left-container').append(drop_down);
 
-          var selected_deployment = $('deployments').val();
+          // Add button options when a deployment gets selected
+          $('#deployments').change( function() {
+            deployment = $('#deployments').val();
 
-          // use jQuery to create a button for each visualizations
-          var label = $(document.createTextNode('Activity Frequency'));
-          var button = $(document.createElement('a'))
-                       .attr({ href: '#',
-                               class: 'theme button white'
-                             })
-                       .click(function () { activity_count.create_chart(deployment); })
-                       .append(label);
-          $('#left-container').append(button);
-
-
-          label = $(document.createTextNode('Files Generated'));
-          button = $(document.createElement('a'))
-                   .attr({ href: '#',
-                           class: 'theme button white'
-                         })
-                   .click(function () { activity_files.create_chart(deployment); })
-                   .append(label);
-          $('#left-container').append(button);
-
-
-          label = $(document.createTextNode('Activities Shared'));
-          button = $(document.createElement('a'))
-                   .attr({ href: '#',
-                           class: 'theme button white'
-                         })
-                   .click(function () { activity_share.create_chart(deployment); })
-                   .append(label);
-          $('#left-container').append(button);
-
+            // if buttons already exists, reload them
+            if ($('#freq').length) {
+              buttons.reload(deployment);
+            }
+            else {
+              buttons.add(deployment);
+            }
+          });
         });
