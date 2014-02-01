@@ -9,12 +9,22 @@ define (["jquery", "highcharts"], function($, highcharts) {
       var options = {
         chart: {
           renderTo: 'center-container',
-          type: 'column'
+          type: 'area'
         },
         title: {
           text: 'Activity Sharing'
         },
         xAxis: {
+          title: {
+            text: 'Activity Name'
+          }
+        },
+        yAxis: {
+          title: {
+            text: "Shared Instances",
+            offset: 100,
+            rotation: 0
+          }
         },
         legend: {
           enabled: false
@@ -32,33 +42,67 @@ define (["jquery", "highcharts"], function($, highcharts) {
           '#a6c96a'
         ],
         plotOptions: {
-          series: {
-            colorByPoint: true
-          }
         },
         series: [{}]
       };
 
-      // retrieve local json file
-      var filepath = "http://localhost/highcharts/" + deployment + "/activity_share.json";
-      $.ajax({
-        'async': false,
-        'global': false,
-        'url': filepath,
-        'dataType': "json",
-        'success': function (data) {
+      var data =
+          {
+            "stats": [
+              1,
+              5,
+              9,
+              11,
+              13,
+              29,
+              25,
+              35,
+              43,
+              57,
+              59,
+              62,
+              98,
+              161,
+              174,
+              189,
+              203,
+              278,
+              350,
+              413,
+              729
+            ],
+            "categories": [
+              "Finance",
+              "InfoSlicer",
+              "VisualMatch",
+              "Etoys",
+              "Clock",
+              "Implode",
+              "TypingTurtle",
+              "Terminal",
+              "ListenAndSpell",
+              "Web",
+              "Pippy",
+              "SocialCalc",
+              "TurtleArt",
+              "Chat",
+              "Colors",
+              "Oficina",
+              "Speak",
+              "TamTamMini",
+              "Maze",
+              "Jukebox",
+              "Record"
+            ]
+          };
+      var series = {
+        name: "Number of activities shared",
+        data: data.stats
+      }
 
-          var series = {
-            name: "Number of activities shared",
-            data: data.stats
-          }
-
-          options.series.push(series);
-          options.xAxis.categories = data.categories;
-          var chart = new Highcharts.Chart(options);
-
-        }
-      });
+      options.series.push(series);
+      options.xAxis.categories = data.categories;
+      var chart = new Highcharts.Chart(options);
     }
   }
 });

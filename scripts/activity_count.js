@@ -15,6 +15,16 @@ define (["jquery", "highcharts"], function($, highcharts) {
           text: 'Activity Frequency'
         },
         xAxis: {
+          title: {
+            text: 'Activity Name'
+          }
+        },
+        yAxis: {
+          title: {
+            text: "Launched Instances",
+            offset: 100,
+            rotation: 0
+          }
         },
         legend: {
           enabled: false
@@ -39,26 +49,68 @@ define (["jquery", "highcharts"], function($, highcharts) {
           series: [{}]
       };
 
-      // retrieve local json file
-      var filepath = "http://localhost/highcharts/" + deployment + "/activity_count.json";
-      $.ajax({
-        'async': false,
-        'global': false,
-        'url': filepath,
-        'dataType': "json",
-        'success': function (data) {
+      var data =
+          {
+            "stats": [
+              2,
+              5,
+              9,
+              11,
+              13,
+              25,
+              25,
+              35,
+              43,
+              59,
+              62,
+              89,
+              98,
+              118,
+              156,
+              167,
+              189,
+              204,
+              216,
+              282,
+              360,
+              413,
+              731
+            ],
+            "categories": [
+              "Finance",
+              "InfoSlicer",
+              "ReadEtexts",
+              "FlipSticks",
+              "VisualMatch",
+              "Etoys",
+              "Castle",
+              "Boxes",
+              "Scribble",
+              "Read",
+              "Clock",
+              "TypingTurtle",
+              "Terminal",
+              "Web",
+              "Pippy",
+              "SocialCalc",
+              "Memorize",
+              "Colors",
+              "Oficina",
+              "AbiWord",
+              "Maze",
+              "Jukebox",
+              "Record"
+            ]
+          };
 
-          var series = {
-            name: "Number of instances launched",
-            data: data.stats
-          }
+      var series = {
+        name: "Number of instances launched",
+        data: data.stats
+      }
 
-          options.series.push(series);
-          options.xAxis.categories = data.categories;
-          var chart = new Highcharts.Chart(options);
-
-        }
-      });
+      options.series.push(series);
+      options.xAxis.categories = data.categories;
+      var chart = new Highcharts.Chart(options);
     }
   }
 });
