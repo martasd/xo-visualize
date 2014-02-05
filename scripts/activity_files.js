@@ -9,12 +9,22 @@ define (["jquery", "highcharts"], function($, highcharts) {
       var options = {
         chart: {
           renderTo: 'center-container',
-          type: 'column'
+          type: 'line'
         },
         title: {
           text: 'Activity Files Generated'
         },
         xAxis: {
+          title: {
+            text: 'Activity Name'
+          }
+        },
+        yAxis: {
+          title: {
+            text: "Files Generated",
+            offset: 100,
+            rotation: 0
+          }
         },
         legend: {
           enabled: false
@@ -33,7 +43,7 @@ define (["jquery", "highcharts"], function($, highcharts) {
         ],
         plotOptions: {
           series: {
-            colorByPoint: true
+            dashStyle: 'Solid'
           }
         },
         series: [{}]

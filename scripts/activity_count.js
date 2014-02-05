@@ -15,6 +15,16 @@ define (["jquery", "highcharts"], function($, highcharts) {
           text: 'Activity Frequency'
         },
         xAxis: {
+          title: {
+            text: 'Activity Name'
+          }
+        },
+        yAxis: {
+          title: {
+            text: "Launched Instances",
+            offset: 100,
+            rotation: 0
+          }
         },
         legend: {
           enabled: false

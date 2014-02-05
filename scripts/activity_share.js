@@ -9,12 +9,22 @@ define (["jquery", "highcharts"], function($, highcharts) {
       var options = {
         chart: {
           renderTo: 'center-container',
-          type: 'column'
+          type: 'area'
         },
         title: {
           text: 'Activity Sharing'
         },
         xAxis: {
+          title: {
+            text: 'Activity Name'
+          }
+        },
+        yAxis: {
+          title: {
+            text: "Shared Instances",
+            offset: 100,
+            rotation: 0
+          }
         },
         legend: {
           enabled: false
