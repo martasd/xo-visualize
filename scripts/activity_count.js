@@ -9,7 +9,8 @@ define (["jquery", "highcharts"], function($, highcharts) {
       var options = {
         chart: {
           renderTo: 'center-container',
-          type: 'column'
+          type: 'column',
+          zoomType: 'x'
         },
         title: {
           text: 'Activity Frequency'
