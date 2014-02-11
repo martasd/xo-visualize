@@ -51,13 +51,9 @@ define (["jquery", "highcharts"], function($, highcharts) {
       };
 
       // retrieve local json file
-      var filepath = "http://localhost/highcharts/" + deployment + "/activity_count.json";
-      $.ajax({
-        'async': false,
-        'global': false,
-        'url': filepath,
-        'dataType': "json",
-        'success': function (data) {
+      var filepath = "data/" + deployment + "/activity_count.json";
+      $.getJSON(filepath)
+      .done(function (data) {
 
           var series = {
             name: "Number of instances launched",
@@ -67,8 +63,6 @@ define (["jquery", "highcharts"], function($, highcharts) {
           options.series.push(series);
           options.xAxis.categories = data.categories;
           var chart = new Highcharts.Chart(options);
-
-        }
       });
     }
   }
