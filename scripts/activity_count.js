@@ -9,7 +9,7 @@ define (["jquery", "highcharts"], function($, highcharts) {
       var options = {
         chart: {
           renderTo: 'center-container',
-          type: 'column',
+          type: 'bar',
           zoomType: 'x'
         },
         title: {

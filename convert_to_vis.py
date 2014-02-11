@@ -39,7 +39,7 @@ def convert_json_for_highcharts(infile, outfile):
     }
 
     # highcharts requires pre-sorting of stats
-    for activity_name in sorted(stats_in, key=stats_in.get):
+    for activity_name in sorted(stats_in, key=stats_in.get, reverse=True):
         # assume one-element list
         stats_val = stats_in[activity_name].values()[0]
         if stats_val != 0:
